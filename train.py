@@ -108,7 +108,8 @@ upsampled_logits = tf.nn.conv2d_transpose(logits, upsample_filter_tensor_x2,
 
 upsampled_logits = upsampled_logits + aux_logits_16s
 
-#对pool3进行2X上采样
+#对pool3进行分类操作在和pool4操作后的feature_map进行eltwise+
+#然后进行2倍上采样
 with tf.variable_scope('vgg_16/fc8'):
     aux_logits_8s = slim.conv2d(pool3_feature, number_of_classes, [1, 1],
                                  activation_fn=None,
@@ -121,8 +122,8 @@ upsampled_logits = tf.nn.conv2d_transpose(upsampled_logits, upsample_filter_tens
                                           padding='SAME')
 upsampled_logits = upsampled_logits + aux_logits_8s
 
-
-#对upsampled_logits 进行8X上采样
+#对pool2进行分类操作在和pool3操作后的feature_map进行eltwise+
+#然后进行8倍上采样
 upsample_filter_np_x8 = bilinear_upsample_weights(upsample_factor,
                                                    number_of_classes)
 
