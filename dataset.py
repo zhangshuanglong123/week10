@@ -34,7 +34,7 @@ def read_and_decode(filename_queue):
 
 
 def inputs(data_set, train=True, batch_size=1, num_epochs=1, upsample_factor_for_whole_net=32):
-    assert os.path.exists(data_set), '[{0}] not exist!!!'.format(data_set)
+    #assert os.path.exists(data_set), '[{0}] not exist!!!'.format(data_set)
     if not num_epochs:
         num_epochs = None
 
